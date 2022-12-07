@@ -35,6 +35,7 @@ app.use(fileUpload({
     useTempFiles : true,
     tempFileDir : '/tmp/'
 }));
+mongoose.set('strictQuery', false);
 
 app.use(favicon(path.join(__dirname, 'ico', 'favicon.ico')))
 

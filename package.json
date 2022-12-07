@@ -16,7 +16,7 @@
   },
   "scripts": {
     "devStart": "nodemon server.js",
-    "start": "nodemon server.js"
+    "start": "node server.js"
   },
   "name": "cls",
   "version": "1.0.0",
