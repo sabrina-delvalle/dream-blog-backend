@@ -18,7 +18,7 @@ app.use(function (req, res, next) {
     res.setHeader('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE, PATCH');
     //res.setHeader('Access-Control-Expose-Headers', '*, Authorization')
     res.setHeader('Access-Control-Allow-Headers', 'Content-Type',  'Set-Cookie', '*');
-    res.setHeader('Access-Control-Allow-Credentials', true);
+    //res.setHeader('Access-Control-Allow-Credentials', true);
     res.header(
         "Access-Control-Allow-Headers",
         "X-Requested-With, X-HTTP-Method-Override, Content-Type, Accept, X-XSRF-TOKEN, XSRF-TOKEN, *"
