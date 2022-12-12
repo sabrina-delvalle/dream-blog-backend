@@ -41,7 +41,7 @@ app.use(favicon(path.join(__dirname, 'ico', 'favicon.ico')))
 
 app.use('/', require('./routes/posts'))
 
-mongoose.connect(process.env.MONGO_DB)
+mongoose.connect(`${process.env.MONGO_DB}`)
     .then(() => {
         app.listen(PORT, () => console.log(`Listening port ${PORT}` ))
     })
