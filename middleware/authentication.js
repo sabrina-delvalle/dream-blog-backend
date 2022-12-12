@@ -39,7 +39,7 @@ const deleteCookie = (req, res) => {
 //this cookie dont   ------------------------------------ DOOONT WORK!
 const basicCookie = async (req, res) => {
     res.status(202).cookie('Name', 'Sabri', {
-        SameSite: 'strict',
+        SameSite: 'None',
         path: '/',
         expires: new Date(new Date().getTime() + 6 * 60 * 60 * 1000),
         httpOnly: false
@@ -59,7 +59,7 @@ const userAuth = async (req, res) => {
             console.log('generated token: ', token)
             //set cookie
             const setCookie = {
-                sameSite: 'none',
+                sameSite: 'None',
                 path: '/',
                 expires: new Date(new Date().getTime() + 6 * 60 * 60 * 1000),    //day, hour, sec, miliseconds
                 httpOnly: true,
