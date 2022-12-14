@@ -33,7 +33,7 @@ const tokenValidation = (req, res) => {
 
 const deleteCookie = (req, res) => {
     console.log('deleting cookie');
-    return res.status(202).clearCookie('Token').send('clear cookie, done.')
+    res.status(202).clearCookie('Token').send('clear cookie, done.')
 }
 
 //this cookie dont   ------------------------------------ DOOONT WORK!
@@ -59,10 +59,10 @@ const userAuth = async (req, res) => {
             console.log('generated token: ', token)
             //set cookie
             const setCookie = {
-                sameSite: 'Strict',
+                sameSite: 'None',
                 path: '/',
                 expires: new Date(new Date().getTime() + 6 * 60 * 60 * 1000),    //day, hour, sec, miliseconds
-                httpOnly: false,
+                httpOnly: true,
                 secure: true
             }
             console.log('current user for local storage... ', user)
