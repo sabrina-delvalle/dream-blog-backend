@@ -60,7 +60,7 @@ const userAuth = async (req, res) => {
             //set cookie
             const setCookie = {
                 sameSite: 'None',
-                domain: `${ORIG1N.slice(8)}`,
+                domain: 'dreamblog.onrender.com',
                 path: '/',
                 expires: new Date(new Date().getTime() + 6 * 60 * 60 * 1000),    //day, hour, sec, miliseconds
                 httpOnly: true,
