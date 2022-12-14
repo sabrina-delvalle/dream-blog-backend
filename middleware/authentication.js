@@ -62,7 +62,7 @@ const userAuth = async (req, res) => {
                 sameSite: 'Strict',
                 path: '/',
                 expires: new Date(new Date().getTime() + 6 * 60 * 60 * 1000),    //day, hour, sec, miliseconds
-                httpOnly: true,
+                httpOnly: false,
                 secure: true
             }
             console.log('current user for local storage... ', user)
