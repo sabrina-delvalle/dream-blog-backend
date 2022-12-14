@@ -60,6 +60,7 @@ const userAuth = async (req, res) => {
             //set cookie
             const setCookie = {
                 sameSite: 'None',
+                domain: `${process.env.ORIG1N}`,
                 path: '/',
                 expires: new Date(new Date().getTime() + 6 * 60 * 60 * 1000),    //day, hour, sec, miliseconds
                 httpOnly: true,
