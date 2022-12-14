@@ -59,7 +59,7 @@ const userAuth = async (req, res) => {
             console.log('generated token: ', token)
             //set cookie
             const setCookie = {
-                sameSite: 'None',
+                sameSite: 'Strict',
                 path: '/',
                 expires: new Date(new Date().getTime() + 6 * 60 * 60 * 1000),    //day, hour, sec, miliseconds
                 httpOnly: true,
