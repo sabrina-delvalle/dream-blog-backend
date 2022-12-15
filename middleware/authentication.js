@@ -61,15 +61,16 @@ const userAuth = async (req, res) => {
             const setCookie = {
                 sameSite : "none",
                 secure: true,
-                httpOnly: false
+                httpOnly: true,
+                path: '/',
                 //sameSite: 'none',
                 //path: '/',
-                //expires: new Date(new Date().getTime() + 6 * 60 * 60 * 1000),    //day, hour, sec, miliseconds
+                expires: new Date(new Date().getTime() + 6 * 60 * 60 * 1000),    //day, hour, sec, miliseconds
                 //httpOnly: true,
                 //secure: true
             }
             console.log('current user for local storage... ', user)
-            res.status(202).cookie("Token", token, setCookie).send(user)
+            return res.status(202).cookie("Token", token, setCookie).send(user)
         }
     }catch(err){
         res.status(400).send(err)
