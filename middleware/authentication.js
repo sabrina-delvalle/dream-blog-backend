@@ -61,7 +61,6 @@ const userAuth = async (req, res) => {
             const setCookie = {
                 sameSite : "none",
                 secure: true,
-                domain: "dreamblog.onrender.com",
                 httpOnly: false
                 //sameSite: 'none',
                 //path: '/',
