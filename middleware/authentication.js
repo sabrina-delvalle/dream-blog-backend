@@ -59,11 +59,15 @@ const userAuth = async (req, res) => {
             console.log('generated token: ', token)
             //set cookie
             const setCookie = {
-                sameSite: 'none',
-                path: '/',
+                sameSite : "none",
+                secure: true,
+                domain: "dreamblog.onrender.com",
+                httpOnly: true
+                //sameSite: 'none',
+                //path: '/',
                 //expires: new Date(new Date().getTime() + 6 * 60 * 60 * 1000),    //day, hour, sec, miliseconds
-                httpOnly: true,
-                secure: true
+                //httpOnly: true,
+                //secure: true
             }
             console.log('current user for local storage... ', user)
             return res.status(202).cookie("Token", token, setCookie).send(user)
