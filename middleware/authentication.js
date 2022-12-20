@@ -4,6 +4,7 @@ const bcrypt = require('bcrypt');
 const User = require('../Models/User');
 
 const tokenCheck = (req, res) => {
+    console.log(req.headers.cookie);
     if(!req.headers.cookie) return (res.json({message: 'ok'}))
     const cookies = req.headers.cookie.split('; ')
     const cookieToken = cookies.filter( elem => elem.split('=')[0] === 'Token' )
@@ -68,9 +69,11 @@ const userAuth = async (req, res) => {
                 expires: new Date(new Date().getTime() + 6 * 60 * 60 * 1000),    //day, hour, sec, miliseconds
                 //httpOnly: true,
                 //secure: true
-            }
-            console.log('current user for local storage... ', user)
-            return res.status(202).cookie("Token", token, setCookie).send(user)
+            };
+            let finalUser = { user, token }
+            console.log('current user for local storage... ', finalUser)
+            //return res.status(202).cookie("Token", token, setCookie).send(user)
+            return res.status(202).send(finalUser)
         }
     }catch(err){
         res.status(400).send(err)

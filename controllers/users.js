@@ -14,7 +14,7 @@ cloudinary.config={
 const createUser =  async (req, res) => {
     const salt = bcrypt.genSaltSync(saltRounds);
     const hashed_password = bcrypt.hashSync(req.body.password, salt);  // hash password
-    const file = req.files.file;
+    const file = req.files;
 
     console.log('my name is: ', req.body.name)
     console.log('my lastname ', req.body.lastname)
