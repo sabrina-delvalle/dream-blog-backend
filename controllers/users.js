@@ -14,7 +14,7 @@ cloudinary.config={
 const createUser =  async (req, res) => {
     const salt = bcrypt.genSaltSync(saltRounds);
     const hashed_password = bcrypt.hashSync(req.body.password, salt);  // hash password
-    const file = req.files;
+    const file = req.files.file;
 
     console.log('my name is: ', req.body.name)
     console.log('my lastname ', req.body.lastname)
@@ -23,8 +23,8 @@ const createUser =  async (req, res) => {
     console.log('my password', req.body.password);
 
     // process to control the image ...
-    console.log('images send to back ', req.files)
-    console.log('image name: ', req.files['file'].name)
+    //console.log('images send to back ', req.files)
+    //console.log('image name: ', req.files['file'].name)
 
     const user = new User({
         name: req.body.name,
