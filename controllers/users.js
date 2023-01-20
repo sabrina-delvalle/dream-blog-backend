@@ -1,5 +1,6 @@
 const User = require('../Models/User');
 const bcrypt = require('bcrypt');
+const { findById, findByIdAndUpdate } = require('../Models/User');
 const saltRounds = 10;
 const cloudinary = require('cloudinary').v2;
 
@@ -14,7 +15,7 @@ cloudinary.config={
 const createUser =  async (req, res) => {
     const salt = bcrypt.genSaltSync(saltRounds);
     const hashed_password = bcrypt.hashSync(req.body.password, salt);  // hash password
-    const file = req.files.file;
+    const file = req.files;
 
     console.log('my name is: ', req.body.name)
     console.log('my lastname ', req.body.lastname)
@@ -26,23 +27,30 @@ const createUser =  async (req, res) => {
     //console.log('images send to back ', req.files)
     //console.log('image name: ', req.files['file'].name)
 
+
     const user = new User({
         name: req.body.name,
         lastname: req.body.lastname,
         username: req.body.username,
         email: req.body.email,
         password: hashed_password
-        //image: req.files['file'].name,      //upload file to cloudinary, use and URL
     });
     
+
+
     try {
-        const result = await cloudinary.uploader.upload(file.tempFilePath, {
+        if(!file){
+            user.image = 'https://res.cloudinary.com/diyvxyidy/image/upload/v1671549902/users/user_bh6ggf.png'
+            let saveUser = await user.save();
+            return res.send(user);
+        }
+        const result = await cloudinary.uploader.upload(file.file.tempFilePath, {
             folder: 'users',
             cloud_name: process.env.CLOUD_N4ME,
             api_key: process.env.CLOUD_K3Y,
             api_secret: process.env.AP1_S3CRET
         })
-        console.log(result)
+        console.log('is reaching in result...',result)
         user.image = result['secure_url']
         let saveUser = await user.save();
         //console.log(user)
@@ -121,4 +129,57 @@ const getHeaders = async (req, res) => {
     }
 }
 
-module.exports = { createUser, getUser, updateUser, deleteUser, getHeaders }
+const userPosts = async(req, res) => {
+    console.log('current id info...', req.body);
+    try {
+        const updateUser = await User.findByIdAndUpdate(req.body.id, 
+                                                        {        
+                                                            $push: {posts: req.body.post_id}
+                                                        }
+                                                        )
+        res.status(200).json(updateUser)
+    } catch(err) {
+        res.json(err)
+    }
+}
+
+const updateProfile = async(req, res) => {
+    console.log('inside update profile info.. and the file is...', req.files);
+    const image = '';
+    //update profile image...
+    const file = req.files;
+    //const user = await User.findById({_id: req.body.id})
+    //console.log('user to update...', user);
+    console.log('files...', req.files);
+    //console.log('user...', user);
+    //find user to apply the updates...
+
+    try {
+        if(file){
+            const result = await cloudinary.uploader.upload(file.image.tempFilePath, {
+                folder: 'users',
+                cloud_name: process.env.CLOUD_N4ME,
+                api_key: process.env.CLOUD_K3Y,
+                api_secret: process.env.AP1_S3CRET
+            })
+            console.log('is reaching in result...',result)
+            //console.log(user)
+            //res.send(user);
+            const dataOptions = {
+                $set: { image: result['secure_url'] }
+            }
+            const user = await User.findByIdAndUpdate(req.body.id, dataOptions);
+            user.image = result['secure_url'];
+            console.log(user);
+            return res.status(200).json(user);
+        }
+    }catch (err){
+        return res.json({error: err});
+    }
+
+
+
+    res.json({status: '200'})
+}
+
+module.exports = { createUser, getUser, updateUser, deleteUser, getHeaders, userPosts, updateProfile }

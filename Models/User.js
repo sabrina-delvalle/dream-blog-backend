@@ -10,6 +10,11 @@ const userSchema = mongoose.Schema({
     email: String,
     password: String,
     image: String,
+    posts: {
+        type: Array,
+        of: String,
+        default: []
+    }
 }, {timestamps: true})
 
 module.exports = mongoose.model('User', userSchema);

@@ -2,6 +2,7 @@ require('dotenv').config();
 const jwt = require('jsonwebtoken')
 const Post = require('../Models/Post');
 const express = require("express");
+const { findByIdAndUpdate } = require('../Models/Post');
 const cloudinary = require('cloudinary').v2;
 const app = express();
 
@@ -23,13 +24,13 @@ const postArticle = async (req, res) => {
         quote: req.body.quote,
         //date: new Date(),
         article: req.body.article,
-        images: req.body.images
+        images: req.body.images,
     });
     try {
-        let newArticle = await article.save();
-        console.log("_id: ", article._id)
+        let newArticle = await article.save();        
+        console.log("_id: ", newArticle)
         //console.log(await Post.findById('630ca02b5d1e9a053edf4112'))
-        res.json(article)
+        res.json(newArticle)
     }catch(err){
         res.json({message: err});
     }

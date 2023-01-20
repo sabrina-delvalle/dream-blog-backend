@@ -55,6 +55,8 @@ router.get('/clearcookie', middleware.deleteCookie)
 router.get('/profile')
 router.get('/token', middleware.tokenCheck)
 router.get('/tokenvalidation', middleware.tokenValidation)
+router.patch('/userposts', usersRouter.userPosts)
+router.patch('/updateaccount', usersRouter.updateProfile)
 
 router.get('/header', usersRouter.getHeaders)
 
