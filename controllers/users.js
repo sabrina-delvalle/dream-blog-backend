@@ -37,8 +37,9 @@ const createUser =  async (req, res) => {
     });
     
 
-
+    console.log('Is reaching before try...');
     try {
+        console.log('Is reaching after try...');
         if(!file){
             user.image = 'https://res.cloudinary.com/diyvxyidy/image/upload/v1671549902/users/user_bh6ggf.png'
             let saveUser = await user.save();
