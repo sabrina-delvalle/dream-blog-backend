@@ -25,6 +25,7 @@ const postArticle = async (req, res) => {
         //date: new Date(),
         article: req.body.article,
         images: req.body.images,
+        autorProfilePic: req.body.profileImage
     });
     try {
         let newArticle = await article.save();        

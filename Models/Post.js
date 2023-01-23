@@ -12,6 +12,7 @@ const postSchema = mongoose.Schema({
         default: Date.now
     },
     article: Object,
+    autorProfilePic: String,
     images: {
         type: Array,
         of: String,
