@@ -41,8 +41,8 @@ router.patch('/update/:id', postsRouter.updateArticle)
 router.delete('/delete/:_id', postsRouter.deleteArticle)
 router.post("/postimage", postsRouter.postImage)
 router.post("/setcookie", postsRouter.setCookie)
-router.get("/checkcookie", postsRouter.checkCookie)
-router.delete("/deletecookie", postsRouter.deleteCookie)
+//router.get("/checkcookie", postsRouter.checkCookie)
+//router.delete("/deletecookie", postsRouter.deleteCookie)
 
 
 //post routes for comments

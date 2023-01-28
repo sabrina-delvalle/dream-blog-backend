@@ -4,16 +4,16 @@ const bcrypt = require('bcrypt');
 const User = require('../Models/User');
 
 const tokenCheck = (req, res) => {
-    console.log(req.headers.cookie);
+    console.log('Log with async version!: ', req.headers.cookie);
     if(!req.headers.cookie) return (res.json({message: 'ok'}))
     const cookies = req.headers.cookie.split('; ')
     const cookieToken = cookies.filter( elem => elem.split('=')[0] === 'Token' )
     console.log("cookie headers!!!: ", cookieToken[0])
     //filter(e => e==='Token')
     if(cookieToken){
-        let token = cookieToken[0].split('=')[1]
-        console.log('token from token ', token)
-        return res.status(200).json({token: token})
+        let Token = cookieToken[0].split('=')[1]
+        console.log('token from token ', Token)
+        return res.status(200).json({token: Token})
     }
     res.send('done readed cooki').json({message: 'ok'})
 }
@@ -40,11 +40,11 @@ const deleteCookie = (req, res) => {
 //this cookie dont   ------------------------------------ DOOONT WORK!
 const basicCookie = async (req, res) => {
     res.status(202).cookie('Name', 'Sabri', {
-        SameSite: 'None',
+        sameSite: 'none',
         path: '/',
         expires: new Date(new Date().getTime() + 6 * 60 * 60 * 1000),
-        httpOnly: false
-        //secure: true
+        httpOnly: false,
+        secure: true
     }).send('initialised')
 }
 
@@ -64,16 +64,12 @@ const userAuth = async (req, res) => {
                 secure: true,
                 httpOnly: true,
                 path: '/',
-                //sameSite: 'none',
-                //path: '/',
                 expires: new Date(new Date().getTime() + 6 * 60 * 60 * 1000),    //day, hour, sec, miliseconds
-                //httpOnly: true,
-                //secure: true
             };
-            let finalUser = { user, token }
-            console.log('current user for local storage... ', finalUser)
-            //return res.status(202).cookie("Token", token, setCookie).send(user)
-            return res.status(202).send(finalUser)
+            //let finalUser = { user, token }
+            //console.log('current user for local storage... ', finalUser)
+            return res.status(202).cookie("Token", token, setCookie).send({ user: user });
+            //return res.status(202).send(finalUser)
         }
     }catch(err){
         res.status(400).send(err)
