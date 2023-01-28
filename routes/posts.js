@@ -11,7 +11,7 @@ router.use(cors({
                 origin:`${process.env.ORIG1N}`,
                 credentials: true,
                 exposedHeaders: ["Set-Cookie", "Authorization"],
-                allowedHeaders: ["X-Requested-With", "X-HTTP-Method-Override", "Content-Type", "Accept", "X-XSRF-TOKEN", "XSRF-TOKEN", "Set-Cookie", "Authorization"]
+                allowedHeaders: ["Origin", "X-Requested-With", "X-HTTP-Method-Override", "Content-Type", "Accept", "X-XSRF-TOKEN", "XSRF-TOKEN", "Set-Cookie", "Authorization"]
             }));
 router.use(function (req, res, next) {
     res.header('Access-Control-Allow-Origin', `${process.env.ORIG1N}`);
