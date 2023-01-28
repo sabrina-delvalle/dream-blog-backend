@@ -62,7 +62,7 @@ const userAuth = async (req, res) => {
             const setCookie = {
                 sameSite : "None",
                 secure: true,
-                httpOnly: false,
+                httpOnly: true,
                 path: '/',
                 expires: new Date(new Date().getTime() + 6 * 60 * 60 * 1000),    //day, hour, sec, miliseconds
             };
