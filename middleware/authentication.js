@@ -60,7 +60,7 @@ const userAuth = async (req, res) => {
             console.log('generated token: ', token)
             //set cookie
             const setCookie = {
-                sameSite : "none",
+                sameSite : "None",
                 secure: true,
                 httpOnly: true,
                 path: '/',
