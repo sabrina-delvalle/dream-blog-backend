@@ -34,7 +34,7 @@ const tokenValidation = (req, res) => {
 
 const deleteCookie = (req, res) => {
     console.log('deleting cookie');
-    res.status(202).clearCookie('Token');
+    res.status(202).clearCookie('Token').send('clear cookie, done.')
     res.redirect('/');
 }
 
