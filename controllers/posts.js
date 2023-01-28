@@ -163,7 +163,30 @@ const postImage = async(req, res) => {
     }catch (err){
         res.json({error: err});
     }
-
 }
 
-module.exports = { postArticle, getArticle, deleteArticle, updateArticle, createArticle, getLatest, getOneArticle, getArticleByName, postComment,  deleteComment, postImage }
+const setCookie = (req, res) => {
+    console.log('inside cookie set');
+    res.status(202).cookie('ID', '555533', {
+        sameSite: 'none',
+        path: '/',
+        expires: new Date(new Date().getTime() + 6 * 60 * 60 * 1000),
+        httpOnly: true,
+        secure: true
+    }).send('initialised')
+}
+
+const checkCookie = (req, res) => {
+    console.log('inside cookie check...');
+    console.log(req.headers.cookie);
+    res.json('checked...')
+}
+
+const deleteCookie = (req, res) => {
+    console.log('inside delete cookie...');
+    res.status(202).clearCookie('ID').json('clear cookie, done.')
+}
+
+
+
+module.exports = { postArticle, getArticle, deleteArticle, updateArticle, createArticle, getLatest, getOneArticle, getArticleByName, postComment,  deleteComment, postImage, setCookie, checkCookie, deleteCookie }

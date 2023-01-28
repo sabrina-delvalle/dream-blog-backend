@@ -14,7 +14,11 @@ const userSchema = mongoose.Schema({
         type: Array,
         of: String,
         default: []
-    }
+    },
+    verified: {
+        type: Boolean,
+        default: false,
+    },
 }, {timestamps: true})
 
 module.exports = mongoose.model('User', userSchema);
