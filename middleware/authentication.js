@@ -33,9 +33,18 @@ const tokenValidation = (req, res) => {
 }
 
 const deleteCookie = (req, res) => {
-    console.log('deleting cookie');
-    res.status(202).clearCookie('Token').send('clear cookie, done.')
-    res.redirect('/');
+    //console.log('deleting cookie');
+    //res.status(202).clearCookie('Token').send('clear cookie, done.')
+    const setCookie = {
+        sameSite : "None",
+        secure: true,
+        httpOnly: false,
+        path: '/',
+        expires: new Date(new Date().getTime() + 0),    //day, hour, sec, miliseconds
+    };
+    //let finalUser = { user, token }
+    //console.log('current user for local storage... ', finalUser)
+    return res.status(202).cookie("delete", 'deletedToken', setCookie).send('clear cookie, done.');
 }
 
 //this cookie dont   ------------------------------------ DOOONT WORK!
