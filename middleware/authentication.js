@@ -44,7 +44,7 @@ const deleteCookie = (req, res) => {
     };
     //let finalUser = { user, token }
     //console.log('current user for local storage... ', finalUser)
-    return res.status(202).cookie("delete", 'deletedToken', setCookie).send('clear cookie, done.');
+    return res.status(202).cookie("Token", 'deletedToken', setCookie).send('clear cookie, done.');
 }
 
 //this cookie dont   ------------------------------------ DOOONT WORK!
