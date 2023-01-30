@@ -61,6 +61,30 @@ const createUser =  async (req, res) => {
     }
 }
 
+//checkUser
+
+const checkUser = async (req, res) => {
+    //console.log(req.body.username);
+    if(req.body.username){
+        try {
+                const checkUser = await User.findOne({username: req.body.username});
+                console.log('user Check: ', checkUser);
+                if(!checkUser) return res.json({valid: true})
+                return res.json({ checkUser })
+        } catch(err) {
+            res.json(err)
+        }
+    }
+    try {
+        const checkUser = await User.findOne({email: req.body.email});
+        console.log('email Check: ', checkUser);
+        if(!checkUser) return res.json({valid: true})
+        return res.json({ checkUser })
+    } catch(err) {
+        res.json(err)
+    }    
+}
+
 //readUser
 const getUser = async (req, res) => {
     try{
@@ -183,4 +207,4 @@ const updateProfile = async(req, res) => {
     res.json({status: '200'})
 }
 
-module.exports = { createUser, getUser, updateUser, deleteUser, getHeaders, userPosts, updateProfile }
+module.exports = { createUser, getUser, updateUser, deleteUser, getHeaders, userPosts, updateProfile, checkUser }

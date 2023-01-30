@@ -51,6 +51,7 @@ router.patch('/comment/delete/:id', postsRouter.deleteComment)
 
 //user routes
 router.post('/register', usersRouter.createUser)
+router.post('/checkuser', usersRouter.checkUser)
 router.post('/login', middleware.userAuth)
 router.get('/user', middleware.authCheck, usersRouter.getUser);
 router.patch('/updateuser/:id', usersRouter.updateUser)
