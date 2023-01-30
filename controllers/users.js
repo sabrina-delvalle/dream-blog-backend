@@ -15,7 +15,7 @@ cloudinary.config={
 const createUser =  async (req, res) => {
     const salt = bcrypt.genSaltSync(saltRounds);
     const hashed_password = bcrypt.hashSync(req.body.password, salt);  // hash password
-    const file = req.files;
+    //const file = req.files;
 
     console.log('my name is: ', req.body.name)
     console.log('my lastname ', req.body.lastname)
@@ -27,18 +27,26 @@ const createUser =  async (req, res) => {
     //console.log('images send to back ', req.files)
     //console.log('image name: ', req.files['file'].name)
 
-
     const user = new User({
         name: req.body.name,
         lastname: req.body.lastname,
         username: req.body.username,
         email: req.body.email,
-        password: hashed_password
+        password: hashed_password,
+        image: req.body.image
     });
+
+    try {
+        //console.log('Is reaching after try...');
+        let saveUser = await user.save();
+        res.send(saveUser);
+    }catch (err){
+        res.json({error: err});
+    }
     
 
-    console.log('Is reaching before try...');
-    try {
+    //console.log('Is reaching before try...');
+    /* try {
         console.log('Is reaching after try...');
         if(!file){
             user.image = 'https://res.cloudinary.com/diyvxyidy/image/upload/v1671549902/users/user_bh6ggf.png'
@@ -56,6 +64,22 @@ const createUser =  async (req, res) => {
         let saveUser = await user.save();
         //console.log(user)
         res.send(user);
+    }catch (err){
+        res.json({error: err});
+    } */
+}
+
+const profilePic = async (req, res) => {
+    const file = req.files;
+    try {
+        const result = await cloudinary.uploader.upload(file.file.tempFilePath, {
+            folder: 'users',
+            cloud_name: process.env.CLOUD_N4ME,
+            api_key: process.env.CLOUD_K3Y,
+            api_secret: process.env.AP1_S3CRET
+        })
+        const image = result['secure_url']
+        res.json({image: image});
     }catch (err){
         res.json({error: err});
     }
@@ -207,4 +231,4 @@ const updateProfile = async(req, res) => {
     res.json({status: '200'})
 }
 
-module.exports = { createUser, getUser, updateUser, deleteUser, getHeaders, userPosts, updateProfile, checkUser }
+module.exports = { createUser, getUser, updateUser, deleteUser, getHeaders, userPosts, updateProfile, checkUser, profilePic }
