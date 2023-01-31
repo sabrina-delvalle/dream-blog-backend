@@ -1,14 +1,14 @@
-require('dotenv').config();
+require("dotenv").config();
 const express = require("express");
 const app = express();
-const cookieParser = require('cookie-parser')
+const cookieParser = require("cookie-parser");
 //const cors = require('cors');
-const bodyParser = require('body-parser');
+const bodyParser = require("body-parser");
 //const cloudinary = require('cloudinary').v2
-const fileUpload = require('express-fileupload');
-const mongoose = require('mongoose');
-var favicon = require('serve-favicon')
-var path = require('path')
+const fileUpload = require("express-fileupload");
+const mongoose = require("mongoose");
+var favicon = require("serve-favicon");
+var path = require("path");
 const { PORT } = process.env;
 
 /* app.use(cors());
@@ -24,25 +24,28 @@ app.use(function (req, res, next) {
       );
     next();
 }); */
-app.use(bodyParser.urlencoded({extended:true}))
+app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
-app.use(express.urlencoded({extended:true}));
-app.use(express.json())
-app.use(cookieParser())
+app.use(express.urlencoded({ extended: true }));
+app.use(express.json());
+app.use(cookieParser());
 
-app.use(fileUpload({
-    useTempFiles : true,
-    tempFileDir : '/tmp/'
-}));
+app.use(
+  fileUpload({
+    useTempFiles: true,
+    tempFileDir: "/tmp/",
+  })
+);
 
-mongoose.set('strictQuery', false);
+mongoose.set("strictQuery", false);
 
-app.use(favicon(path.join(__dirname, 'ico', 'favicon.ico')))
+app.use(favicon(path.join(__dirname, "ico", "favicon.ico")));
 
-app.use('/', require('./routes/posts'))
+app.use("/", require("./routes/posts"));
 
-mongoose.connect(`${process.env.MONGO_DB}`)
-    .then(() => {
-        app.listen(PORT, () => console.log(`Listening port ${PORT}` ))
-    })
-    .catch(err => console.log(err))
+mongoose
+  .connect(`${process.env.MONGO_DB}`)
+  .then(() => {
+    app.listen(PORT, () => console.log(`Listening port ${PORT}`));
+  })
+  .catch((err) => console.log(err));

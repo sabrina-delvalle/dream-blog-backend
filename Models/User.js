@@ -1,9 +1,10 @@
-const mongoose = require('mongoose');
+const mongoose = require("mongoose");
 
 /* mongoose.connect(process.env.MONGO_DB)
     .then(() => console.log('connected to MongoDB.')); */
 
-const userSchema = mongoose.Schema({
+const userSchema = mongoose.Schema(
+  {
     name: String,
     lastname: String,
     username: String,
@@ -11,14 +12,16 @@ const userSchema = mongoose.Schema({
     password: String,
     image: String,
     posts: {
-        type: Array,
-        of: String,
-        default: []
+      type: Array,
+      of: String,
+      default: [],
     },
-    verified: {
-        type: Boolean,
-        default: false,
+    confirmed: {
+      type: Boolean,
+      default: false,
     },
-}, {timestamps: true})
+  },
+  { timestamps: true }
+);
 
-module.exports = mongoose.model('User', userSchema);
+module.exports = mongoose.model("User", userSchema);
