@@ -8,6 +8,7 @@ const bodyParser = require("body-parser");
 const fileUpload = require("express-fileupload");
 const mongoose = require("mongoose");
 var favicon = require("serve-favicon");
+const cors = require('cors');
 var path = require("path");
 const { PORT } = process.env;
 
@@ -29,6 +30,9 @@ app.use(bodyParser.json());
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
 app.use(cookieParser());
+app.use(cors({
+  origin: `${process.env.ORIG1N}`
+}));
 
 app.use(
   fileUpload({
