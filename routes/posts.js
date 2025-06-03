@@ -29,7 +29,7 @@ router.use(function (req, res, next) {
   res.header("Access-Control-Allow-Origin", `${process.env.ORIG1N}`);
   res.header("Access-Control-Allow-Methods", ["GET, POST, PUT, DELETE, PATCH"]);
   res.header('Access-Control-Expose-Headers', '*, Authorization')
-  res.header('Access-Control-Allow-Headers', ['Content-Type', 'Set-Cookie', '*']);
+  res.header('Access-Control-Allow-Headers', ['Authorization, Content-Type', 'Set-Cookie', '*']);
   res.header("Access-Control-Allow-Credentials", true);
   //    res.header("Access-Control-Allow-Headers", "X-Requested-With", "X-HTTP-Method-Override", "Content-Type", "Accept", "X-XSRF-TOKEN", "XSRF-TOKEN", "Set-Cookie", "Authorization", "*");
   //res.header("Access-Control-Allow-Headers", "XSRF-TOKEN, Set-Cookie, Authorization");

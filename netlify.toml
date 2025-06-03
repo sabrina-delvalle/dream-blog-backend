@@ -1,0 +1,6 @@
+[build]
+  command = "npm run build"
+
+[build.environment]
+  FRONTEND_URL = "https://dreamblogs.netlify.app"
+  BACKEND_URL = "https://dreamblogserver.netlify.app"
